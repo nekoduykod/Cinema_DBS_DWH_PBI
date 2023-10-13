@@ -1,4 +1,3 @@
-         # Ану сюди!
 from sqlalchemy import create_engine
 import pandas as pd
 
@@ -34,3 +33,13 @@ final_df = final_df.merge(users_df, on='customer_id', how='left')
  
          # Загружаємо у PostgreSQL DB redshift_dev 
 final_df.to_sql('cinema_data', conn_reddev, if_exists='replace', index=False)
+
+""" 
+До відома, Amazon Redshift з'єднання з допомогою SQLAlchemy. З psycopg2 
+буде lower-level abstraction. Але psycopg2 - повільніша, чим SQLAlchemy
+
+# 001 redshift_url = "postgresql://your_redshift_user:your_redshift_password@your_redshift_host:5439/your_redshift_db" 
+# 002 conn_redshift = create_engine(redshift_url)
+# 003 final_df.to_sql('cinema_data', conn_redshift, if_exists='replace', index=False)
+
+"""

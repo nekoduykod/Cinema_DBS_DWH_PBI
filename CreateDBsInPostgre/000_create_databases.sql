@@ -8,6 +8,6 @@ CREATE DATABASE schedules;
 CREATE DATABASE redshift_dev;
  
 
--- Налаштуйте user owner. В мене звичайний 'postgres' user з паролем. Пароль треба для Python-script`s connection   
+-- Налаштуйте user owner. Обрав 'postgres' user з паролем, який треба для .py-script`s connection   
 -- Коли таблиці створите, наповніть даними з InsertFakeSQL папки
--- Далі, .py скрипт - до ваших послуг
+-- Далі, .py скрипт - до ваших послуг '''
