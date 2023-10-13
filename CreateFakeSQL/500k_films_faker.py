@@ -7,17 +7,17 @@ os.chdir('D:\PROJECTS\Cinema_DBS_DWH_PBI\InsertFakeSQL')
 # Create a Faker object
 fake = faker.Faker()
 
-# Generate a list of 1000 fake films
+# Generate a list of 500,000 fake films
 films = []
-for i in range(1000):
+for i in range(500000):
     film = {
-        'film_id': i + 1,   
-        'finame_en': fake.sentence(nb_words=3).rstrip('.'),
-        'finame_uk': fake.sentence(nb_words=3).rstrip('.'),
-        'finame_de': fake.sentence(nb_words=3).rstrip('.'),
-        'descr_en': fake.text(max_nb_chars=1000).rstrip('.'),
-        'descr_uk': fake.text(max_nb_chars=1000).rstrip('.'),
-        'descr_de': fake.text(max_nb_chars=1000).rstrip('.'),
+        'film_id': i + 1,
+        'finame_en': fake.word(),
+        'finame_uk': fake.word(),
+        'finame_de': fake.word(),
+        'descr_en': fake.word(),
+        'descr_uk': fake.word(),
+        'descr_de': fake.word(),
         'technology': fake.random_element(elements=('2D', '3D', 'IMAX')),
         'duration': fake.random_int(min=60, max=180),
         'genres': fake.random_element(elements=('Action', 'Adventure', 'Comedy', 'Drama', 'Horror', 'Sci-Fi', 'Thriller')),
@@ -25,7 +25,7 @@ for i in range(1000):
     }
     films.append(film)
 
-# Generate insert queries  
+# Generate insert queries
 insert_queries = []
 for film in films:
     insert_query = """
@@ -39,6 +39,6 @@ for film in films:
     insert_queries.append(insert_query)
 
 # Write the insert queries to a .sql file
-with open('001_films_queries.sql', 'w') as f:
+with open('500k_films_queries.sql', 'w') as f:
     for insert_query in insert_queries:
         f.write(insert_query + '\n')

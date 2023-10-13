@@ -20,8 +20,8 @@ end_date = datetime.now() + timedelta(days=30)
 cin_id_counter = 1
 cinhall_id_counter = 1
 
-# Continue generating entries until we reach 1000 inserts
-while len(timetable_entries) < 1000:
+# Continue generating entries until we reach 500,000 inserts
+while len(timetable_entries) < 500000:
     # Generate random minutes in the range of 80 to 140
     minutes = random.randint(80, 140)
 
@@ -30,8 +30,8 @@ while len(timetable_entries) < 1000:
     end_time = start_time + timedelta(minutes=minutes)
 
     entry = {
-        'schedule_id': len(timetable_entries) + 1,
-        'film_id': len(timetable_entries) + 1,
+        'schedule_id': len(timetable_entries) + 1,  # Можна встановити до максимум 10 sched_id, по принципу cin_id, 
+        'film_id': len(timetable_entries) + 1,      # щоб не було 500 тисяч schedule_id. Так само для фільмів, тощо
         'start_time': start_time,
         'end_time': end_time,
         'cin_id': cin_id_counter,
@@ -63,6 +63,6 @@ for entry in timetable_entries:
     insert_queries.append(insert_query)
 
 # Write the insert queries to a file
-with open('004_timetable_queries.sql', 'w') as f:
+with open('500k_timetable_queries.sql', 'w') as f:
     for insert_query in insert_queries:
         f.write(insert_query + '\n')

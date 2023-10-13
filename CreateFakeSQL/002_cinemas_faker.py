@@ -1,8 +1,8 @@
 import faker
 import os
 
-# Change the current working directory to the D:\projects\databases_to_DWH directory
-os.chdir('D:\projects\databases_to_DWH\data_filler')
+# Directory to load
+os.chdir('D:\PROJECTS\Cinema_DBS_DWH_PBI\InsertFakeSQL')
 
 # Create a Faker object
 fake = faker.Faker()
@@ -39,7 +39,7 @@ for cinema in cinemas:
     )
     insert_queries.append(insert_query)
 
-# Write the insert queries to a file
-with open('cinema_queries.sql', 'w') as f:
+# Write the insert queries to a .sql file
+with open('002_cinema_queries.sql', 'w') as f:
     for insert_query in insert_queries:
         f.write(insert_query + '\n')

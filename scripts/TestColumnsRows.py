@@ -17,7 +17,6 @@ timetable_df = pd.read_sql_query("SELECT * FROM timetable", sched_url)
 cinemas_df = pd.read_sql_query("SELECT * FROM cinemas", sched_url)
 tickets_df = pd.read_sql_query("SELECT * FROM tickets", sched_url)
 users_df = pd.read_sql_query("SELECT * FROM users", sched_url)
-
  
          # "films" + "timetable" 
 print("films_df:")
