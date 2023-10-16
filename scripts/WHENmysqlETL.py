@@ -2,10 +2,10 @@ from sqlalchemy import create_engine
 import pandas as pd
 
          # URLs для MySQL movies, schedules, users БД, та PostgreSQL БД
-MySQL_URL_1 = "mysql+pymysql://sasha:hellcat#123@localhost:3306/movies"
-MySQL_URL_2 = "mysql+pymysql://sasha:hellcat#123@localhost:3306/cinemas"
-MySQL_URL_3 = "mysql+pymysql://sasha:hellcat#123@localhost:3306/schedules"
-reddev_url = "postgresql://postgres:123@localhost:5432/redshift_dev"
+MySQL_URL_1 = "mysql+pymysql://YOUR_USER:YOUR_PASS@localhost:3306/movies"
+MySQL_URL_2 = "mysql+pymysql://YOUR_USER:YOUR_PASS@localhost:3306/cinemas"
+MySQL_URL_3 = "mysql+pymysql://YOUR_USER:YOUR_PASS@localhost:3306/schedules"
+reddev_url = "postgresql://postgres:YOUR_PASS@localhost:5432/redshift_dev"
  
          # Створюємо SQLAlchemy-з'єднання для БД
 conn_movies = create_engine(MySQL_URL_1)

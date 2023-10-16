@@ -2,9 +2,9 @@ from sqlalchemy import create_engine
 import pandas as pd
 
          # Визначаємо URLs для PostgreSQL redshift_dev, movies, schedules, users баз даних
-movies_url = "postgresql://postgres:123@localhost:5432/movies"
-sched_url = "postgresql://postgres:123@localhost:5432/schedules"
-reddev_url = "postgresql://postgres:123@localhost:5432/redshift_dev"
+movies_url = "postgresql://postgres:YOUR_PASS@localhost:5432/movies"
+sched_url = "postgresql://postgres:YOUR_PASS@localhost:5432/schedules"
+reddev_url = "postgresql://postgres:YOUR_PASS@localhost:5432/redshift_dev"
 
          # Створюємо SQLAlchemy з'єднання для кожної бази 
 conn_reddev = create_engine(reddev_url)
@@ -21,10 +21,10 @@ users_df = pd.read_sql_query("SELECT * FROM users", sched_url)
          # "films" + "timetable" 
 films_timetable_df = films_df.merge(timetable_df, on='film_id', how='left') 
 
-         # cinemas + films_timetable 
+         # films_timetable + cinemas  
 cinemas_films_timetable_df = cinemas_df.merge(films_timetable_df, on='cin_id', how='left')
 
-         # tickets + cinemas_films_timetable 
+         # cinemas_films_timetable + tickets   
 final_df = cinemas_films_timetable_df.merge(
     tickets_df, on=['schedule_id', 'cin_id', 'cinhall_id'], how='left')
  
@@ -32,7 +32,7 @@ final_df = cinemas_films_timetable_df.merge(
 final_df = final_df.merge(users_df, on='customer_id', how='left')
  
          # Загружаємо у PostgreSQL DB redshift_dev 
-final_df.to_sql('cinema_data', conn_reddev, if_exists='replace', index=False)
+final_df.to_sql('cinema_dwh', conn_reddev, if_exists='replace', index=False)
 
 """ 
 До відома, Amazon Redshift з'єднання з допомогою SQLAlchemy. З psycopg2 
