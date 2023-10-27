@@ -1,16 +1,11 @@
 import faker
 import os
 
-# Directory to load
 os.chdir('D:\PROJECTS\Cinema_DBS_DWH_PBI\InsertFakeSQL')
 
-# Create a Faker object
 fake = faker.Faker()
-
-# Initialize id to 1
 id = 1
 
-# Generate a list of 1000 fake cinemas
 cinemas = []
 for i in range(9):
     cinema = {
@@ -24,10 +19,8 @@ for i in range(9):
     }
     cinemas.append(cinema)
     
-    # Increment 'id' for the next record
     id += 1
     
-# Generate insert queries for each cinema
 insert_queries = []
 for cinema in cinemas:
     insert_query = """
@@ -39,7 +32,6 @@ for cinema in cinemas:
     )
     insert_queries.append(insert_query)
 
-# Write the insert queries to a .sql file
 with open('002_cinema_queries.sql', 'w') as f:
     for insert_query in insert_queries:
         f.write(insert_query + '\n')
