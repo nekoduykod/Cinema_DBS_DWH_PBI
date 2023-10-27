@@ -3,29 +3,19 @@ import os
 import random
 from datetime import datetime, timedelta
 
-# Directory to load
 os.chdir('D:\PROJECTS\Cinema_DBS_DWH_PBI\InsertFakeSQL')
-
-# Create a Faker object
 fake = faker.Faker()
-
-# Generate a list of fake timetable entries with your specified pattern
 timetable_entries = []
 
-# Define a time window for scheduling, let's say 30 days ago to 30 days in the future
 start_date = datetime.now() - timedelta(days=30)
 end_date = datetime.now() + timedelta(days=30)
 
-# Initialize counters for cin_id and cinhall_id
 cin_id_counter = 1
 cinhall_id_counter = 1
 
-# Continue generating entries until we reach 500,000 inserts
 while len(timetable_entries) < 500000:
-    # Generate random minutes in the range of 80 to 140
     minutes = random.randint(80, 140)
 
-    # Calculate end time by adding the minutes to start_time
     start_time = fake.date_time_between(start_date=start_date, end_date=end_date)
     end_time = start_time + timedelta(minutes=minutes)
 
@@ -42,7 +32,6 @@ while len(timetable_entries) < 500000:
     }
     timetable_entries.append(entry)
 
-    # Update cin_id and cinhall_id counters, and start over if needed
     cinhall_id_counter += 1
     if cinhall_id_counter > 7:
         cinhall_id_counter = 1
@@ -50,7 +39,6 @@ while len(timetable_entries) < 500000:
         if cin_id_counter > 9:
             cin_id_counter = 1
 
-# Generate insert queries for each timetable entry
 insert_queries = []
 for entry in timetable_entries:
     insert_query = """
@@ -62,7 +50,6 @@ for entry in timetable_entries:
     )
     insert_queries.append(insert_query)
 
-# Write the insert queries to a file
 with open('500k_timetable_queries.sql', 'w') as f:
     for insert_query in insert_queries:
         f.write(insert_query + '\n')
