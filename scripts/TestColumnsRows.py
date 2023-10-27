@@ -1,17 +1,16 @@
 from sqlalchemy import create_engine
 import pandas as pd
 
-         # Визначаємо URLs для PostgreSQL redshift_dev, movies, schedules, users баз даних
+
 movies_url = "postgresql://postgres:123@localhost:5432/movies"
 sched_url = "postgresql://postgres:123@localhost:5432/schedules"
 reddev_url = "postgresql://postgres:123@localhost:5432/redshift_dev"
 
-         # Створюємо SQLAlchemy з'єднання для кожної бази 
 conn_reddev = create_engine(reddev_url)
 conn_movies = create_engine(movies_url)
 conn_schedules = create_engine(sched_url)
 
-         # Витягаємо дані з джерел
+
 films_df = pd.read_sql_query("SELECT * FROM films", movies_url)
 timetable_df = pd.read_sql_query("SELECT * FROM timetable", sched_url)
 cinemas_df = pd.read_sql_query("SELECT * FROM cinemas", sched_url)
@@ -38,5 +37,4 @@ final_df = final_df.merge(users_df, on='customer_id', how='left')
 print("final_df2:")
 print(final_df.shape) 
 
-        # Загружаємо у PostgreSQL DB redshift_dev 
 final_df.to_sql('test_warehouse', conn_reddev, if_exists='replace', index=False) 
