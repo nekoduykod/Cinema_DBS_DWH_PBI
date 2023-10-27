@@ -1,23 +1,20 @@
 import faker
 import os
-# Create a Faker object
+
 fake = faker.Faker()
 
-# Directory to load
+
 os.chdir('D:\PROJECTS\Cinema_DBS_DWH_PBI\InsertFakeSQL')
 
-# Initialize counters for cin_id and cinhall_id
 cin_id_counter = 1
 cinhall_id_counter = 1
 
-# Generate a list of fake user entries and tickets
 user_entries = []
 tickets = []
 
 for i in range(500000):  # Generate 500k records
     ph_num = fake.bothify(text='##########')
     
-    # Generate user entry
     user_entry = {
         'customer_id': i + 1,
         'ph_num': ph_num,
@@ -26,16 +23,13 @@ for i in range(500000):  # Generate 500k records
         'profile1': fake.word(),
         'profile2': fake.word(),
         'orders': i + 1,  # Or generate some unique value
-        'transactions': i + 1  # Or generate some unique value
+        'transactions': i + 1  
     }
     user_entries.append(user_entry)
-    # Initialize the 'id' variable
  
-
-    # Generate a list of fake tickets   
     cin_id_values = list(range(1, 10))  
     cinhall_id_values = list(range(1, 8))  
-    # Generate ticket entry with matching 'customer_id' and 'cin_id' / 'cinhall_id'
+
     cin_id = cin_id_counter
     cinhall_id = cinhall_id_counter
     ticket_entry = {
@@ -51,7 +45,6 @@ for i in range(500000):  # Generate 500k records
     }
     tickets.append(ticket_entry)
         
-    # Update cin_id and cinhall_id counters, and start over if needed
     cinhall_id_counter += 1
     if cinhall_id_counter > 7:
         cinhall_id_counter = 1
@@ -59,7 +52,6 @@ for i in range(500000):  # Generate 500k records
         if cin_id_counter > 9:
             cin_id_counter = 1
 
-# Write the insert queries for users to a file
 with open('500k_users_queries.sql', 'w') as f:
     for entry in user_entries:
         insert_query = """
@@ -71,7 +63,6 @@ with open('500k_users_queries.sql', 'w') as f:
         )
         f.write(insert_query + '\n')
 
-# Write the insert queries for tickets to a file
 with open('500k_tickets_queries.sql', 'w') as f:
     for entry in tickets:
         insert_query = """
