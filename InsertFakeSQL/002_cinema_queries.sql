@@ -51,4 +51,3 @@ Seanside, MT 15317', True, 94);
     VALUES (9, 'SumyPlaneta', 'СумиПланета', '1348 Thompson Trafficway
 Tonyport, OK 69214', '84263 Michael Way
 Marychester, GU 68720', True, 141);
-    
