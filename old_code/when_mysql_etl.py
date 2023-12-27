@@ -36,4 +36,3 @@ final_df.to_sql('cinema_data', conn_redshift, if_exists='replace', index=False)
 
 With psycopg2 way of connection - lower-level abstraction, but - slower
 """
-
