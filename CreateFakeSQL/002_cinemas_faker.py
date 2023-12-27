@@ -18,7 +18,7 @@ for i in range(9):
         'avail_seats': fake.random_int(min=50, max=200)  # Adjust the range as needed
     }
     cinemas.append(cinema)
-    
+
     id += 1
     
 insert_queries = []

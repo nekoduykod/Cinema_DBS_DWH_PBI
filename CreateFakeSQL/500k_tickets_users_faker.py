@@ -3,7 +3,6 @@ import os
 
 fake = faker.Faker()
 
-
 os.chdir('D:\PROJECTS\Cinema_DBS_DWH_PBI\InsertFakeSQL')
 
 cin_id_counter = 1
